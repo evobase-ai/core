@@ -1,15 +1,14 @@
-# EvoBase Framework = EvolvingAgent-Zero
+# EvoBase Framework  
+*Also known as EvolvingAgent-Zero in academic literature*
 
-**The first closed-loop self-evolving paradigm for on-device small language models (SLMs)**  
-**First proposed: November 7, 2025**  
+**A closed-loop self-evolution framework for on-device small language models (SLMs)**  
+**First proposed**: November 7, 2025  
 **Author**: Wang Zhongren  
 **Assisted by**: ChatGPT and Grok  
 **License**: MIT
 
-[![Zenodo v1: EvolvingAgent-Zero Paper](https://zenodo.org/badge/DOI/10.5281/zenodo.17549670.svg)](https://doi.org/10.5281/zenodo.17549670)  
-[![Zenodo v2: EvoBase Framework](https://zenodo.org/badge/DOI/10.5281/zenodo.17555914.svg)](https://doi.org/10.5281/zenodo.17555914)
-
----
+[![DOI v1: EvolvingAgent-Zero](https://zenodo.org/badge/DOI/10.5281/zenodo.17549670.svg)](https://doi.org/10.5281/zenodo.17549670)  
+[![DOI v2: EvoBase Framework](https://zenodo.org/badge/DOI/10.5281/zenodo.17555914.svg)](https://doi.org/10.5281/zenodo.17555914)
 
 ## One-Click Demo
 
