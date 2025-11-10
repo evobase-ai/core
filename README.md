@@ -1,9 +1,7 @@
 # EvoBase Framework  
 *Also known as EvolvingAgent-Zero in academic literature*
 
-**A closed-loop self-evolution framework for on-device small language models (SLMs)**  
-**First proposed**: November 7, 2025  
-**Author**: Wang Zhongren  
+**A closed-loop self-evolution framework for on-device small language models (SLMs)**   
 **Assisted by**: ChatGPT and Grok  
 **License**: MIT
 
