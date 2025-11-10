@@ -15,7 +15,17 @@ pip install -r requirements.txt
 python RUN_ME.py
 ```
 
-> **Output**: Daily interaction → VAMS filtering → Sleep consolidation → SQIA check → State saved
+> **Output**: Daily interaction → VAMS filtering → Sleep consolidation → SQIA check → LoRA correction → State saved
+
+### 🇨🇳 中国境内用户专属方案
+**所有模型均通过魔搭（ModelScope）镜像下载，无需科学上网**：
+```bash
+USE_MODELSCOPE=true python RUN_ME.py  # Linux/Mac
+# 或
+set USE_MODELSCOPE=true && python RUN_ME.py  # Windows
+```
+> ✅ 已验证可在无外网环境下运行  
+> ✅ 覆盖 Qwen 模型 + Sentence-BERT 嵌入模型
 
 ---
 
@@ -37,9 +47,10 @@ User Interaction
 
 | Component | Formula / Logic |
 |---------|-----------------|
-| **VAMS** | `Score = R × (0.4 + 0.3E + 0.3V)` <br> `R`: relevance, `E`: emotion, `V`: value alignment |
-| **SQIA** | `Drift = 1 - cos(Gen(q), Truth(q))` <br> `if Drift > 0.15 → LoRA correction` |
+| **VAMS** | `Score = R × (0.4 + 0.3E + 0.3V)` <br> `R`: keyword-based relevance, `E`: TextBlob sentiment polarity, `V`: value-aligned keyword matching |
+| **SQIA** | `Drift = 1 - cos(Gen(q), Truth(q))` <br> Uses Sentence-BERT embeddings; `if Drift > 0.15 → LoRA correction` |
 | **Sleep** | Keep top-k memories by VAMS score |
+| **LoRA** | PEFT-based adapter on `q_proj/v_proj` layers; fine-tuned during SQIA correction |
 
 ---
 
@@ -76,20 +87,32 @@ User Interaction
 ## Files
 
 - [`EvoBase Framework.pdf`](EvoBase%20Framework.pdf) – Full specification with pseudocode and diagrams  
-- [`src/evobase.py`](src/evobase.py) – Core engine  
-- [`RUN_ME.py`](RUN_ME.py) – One-click demo script  
-- [`requirements.txt`](requirements.txt) – Dependencies  
+- [`src/evobase.py`](src/evobase.py) – Core engine (now with real VAMS/SQIA/LoRA)  
+- [`RUN_ME.py`](RUN_ME.py) – One-click demo script (supports ModelScope fallback)  
+- [`requirements.txt`](requirements.txt) – Dependencies (includes sentence-transformers, textblob, peft, modelscope)  
 
 ---
 
-## Run Locally
+## Run Locally (China Optimized)
 
 ```bash
 git clone https://github.com/evobase-ai/core.git
 cd core
 pip install -r requirements.txt
-python RUN_ME.py
+python -m textblob.download_corpora  # Required for VAMS sentiment analysis
 ```
+
+### 中国境内运行命令：
+```bash
+# 启用全链路魔搭镜像（无需外网）
+USE_MODELSCOPE=true python RUN_ME.py  # Linux/Mac
+set USE_MODELSCOPE=true && python RUN_ME.py  # Windows
+```
+
+> **Note**: First run will download from **魔搭 ModelScope**:
+> - Qwen2-0.5B model (~1.2GB) 
+> - Sentence-BERT (`all-MiniLM-L6-v2`, ~80MB)
+> **全程使用国内 CDN 加速，无需任何代理**
 
 ---
 
